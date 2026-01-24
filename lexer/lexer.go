@@ -82,24 +82,6 @@ func (l *Lexer) NextToken() token.Token {
 		if isLetter(l.ch) {
 			tok.Literal = l.readIdentifier()
 			tok.Type = token.LookupIdent(tok.Literal)
-			// else ifの判定
-			if tok.Type == token.ELSE {
-				bkPosition := l.position
-				bkReadPosition := l.readPosition
-				bkCh := l.ch
-
-				l.skipWhiteSpace()
-
-				if l.readIdentifier() == "if" {
-					tok.Literal = "else if"
-					tok.Type = token.ELSEIF
-				} else {
-					// 状態を元に戻す
-					l.position = bkPosition
-					l.readPosition = bkReadPosition
-					l.ch = bkCh
-				}
-			}
 			return tok
 		} else if isDigit(l.ch) {
 			tok.Type = token.INT

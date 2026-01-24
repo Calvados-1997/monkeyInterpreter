@@ -7,7 +7,8 @@ import (
 )
 
 func TestToken(t *testing.T) {
-	input := `let five = 5;
+	input := `
+	let five = 5;
 	let ten = 10;
 
 	let add = fn(x, y) {
@@ -18,6 +19,8 @@ func TestToken(t *testing.T) {
 	5 < 10 < 5;
 
 	if (5 < 10) {
+	  return true;
+	} else if (5 < 7) {
 	  return true;
 	} else {
 	  return false;
@@ -82,6 +85,17 @@ func TestToken(t *testing.T) {
 		{token.INT, "5"},
 		{token.LT, "<"},
 		{token.INT, "10"},
+		{token.RPAREN, ")"},
+		{token.LBRACE, "{"},
+		{token.RETURN, "return"},
+		{token.TRUE, "true"},
+		{token.SEMICOLON, ";"},
+		{token.RBRACE, "}"},
+		{token.ELSEIF, "else if"},
+		{token.LPAREN, "("},
+		{token.INT, "5"},
+		{token.LT, "<"},
+		{token.INT, "7"},
 		{token.RPAREN, ")"},
 		{token.LBRACE, "{"},
 		{token.RETURN, "return"},
